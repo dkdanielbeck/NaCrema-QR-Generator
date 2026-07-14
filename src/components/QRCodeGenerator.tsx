@@ -11,15 +11,15 @@ import { LOGOS } from '../utils/logos';
 import './QRCodeGenerator.css';
 
 const TikTokIcon = ({ className }: { className?: string }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
     width="18"
     height="18"
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="1.5" 
-    strokeLinecap="round" 
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
     strokeLinejoin="round"
     className={className}
   >
@@ -118,35 +118,35 @@ const QRCodeGenerator: React.FC = () => {
 
   const handleDownload = async () => {
     if (!qrCode.current) return;
-    
+
     const blob = await qrCode.current.getRawData('svg');
     if (!blob) return;
-    
+
     let svgText = await blob.text();
-    
+
     if (logoUrl) {
       // Decode the base64 SVG logo to inline it (Figma drops <image> tags)
       const base64Data = logoUrl.split(',')[1];
       if (base64Data) {
         const decodedSvg = atob(base64Data);
-        
+
         // Find the <image> tag in the generated SVG
         const imageRegex = /<image([^>]*)>(.*?)<\/image>|<image([^>]*)\/>/gi;
-        
+
         svgText = svgText.replace(imageRegex, (_match: string, attrs1: string, _content: string, attrs2: string) => {
           const attrs = attrs1 || attrs2 || '';
-          
+
           // Extract x, y, width, height from the original <image> tag
           const xMatch = attrs.match(/x="([^"]*)"/);
           const yMatch = attrs.match(/y="([^"]*)"/);
           const wMatch = attrs.match(/width="([^"]*)"/);
           const hMatch = attrs.match(/height="([^"]*)"/);
-          
+
           const x = xMatch ? xMatch[1] : '0';
           const y = yMatch ? yMatch[1] : '0';
           const width = wMatch ? wMatch[1] : '0';
           const height = hMatch ? hMatch[1] : '0';
-          
+
           // Inline the decoded SVG by removing its existing x,y,width,height and applying the bounding box
           return decodedSvg.replace(/<svg([^>]*)>/i, (_svgMatch, svgAttrs) => {
             const newAttrs = svgAttrs.replace(/\s+(x|y|width|height)="[^"]*"/gi, '');
@@ -231,7 +231,7 @@ const QRCodeGenerator: React.FC = () => {
             <button
               className="quick-link-btn"
               onClick={() => {
-                setUrl('https://www.facebook.com/people/Na-Crema/61559169265299/?locale=da_DK');
+                setUrl('https://www.facebook.com/people/Na-Crema/61559169265299');
                 setLogoUrl(LOGOS.facebook);
               }}
               title="Vælg Facebook"
