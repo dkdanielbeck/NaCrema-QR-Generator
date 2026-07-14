@@ -204,6 +204,10 @@
   stroke: var(--color-bg-primary);
 }
 
+.logo-btn.active .btn-icon-img {
+  filter: brightness(0) invert(1);
+}
+
 /* Right Column: Live Preview */
 .qr-preview-wrapper {
   flex: 1;
