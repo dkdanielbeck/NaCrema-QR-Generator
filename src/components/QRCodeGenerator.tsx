@@ -10,9 +10,18 @@ import { Download, Palette, Link, Image as ImageIcon } from 'lucide-react';
 import { LOGOS } from '../utils/logos';
 import './QRCodeGenerator.css';
 
-// Custom TikTok SVG Icon for the UI button
-const TikTokIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+// Custom TikTok SVG Icon
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="1.5" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+    className={className}
+  >
     <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
   </svg>
 );
@@ -173,11 +182,43 @@ const QRCodeGenerator: React.FC = () => {
           </label>
           <input
             type="text"
-            className="control-input"
+            className="url-input"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            placeholder="https://..."
+            placeholder="https://nacrema.dk"
           />
+          <div className="quick-links">
+            <button
+              className="quick-link-btn"
+              onClick={() => {
+                setUrl('https://www.instagram.com/nacremadk/');
+                setLogoUrl(LOGOS.instagram);
+              }}
+              title="Vælg Instagram"
+            >
+              <img src={LOGOS.instagram} alt="" className="quick-link-icon" /> Instagram
+            </button>
+            <button
+              className="quick-link-btn"
+              onClick={() => {
+                setUrl('https://www.tiktok.com/@nacremadk');
+                setLogoUrl(LOGOS.tiktok);
+              }}
+              title="Vælg TikTok"
+            >
+              <TikTokIcon className="quick-link-icon svg-icon" /> TikTok
+            </button>
+            <button
+              className="quick-link-btn"
+              onClick={() => {
+                setUrl('https://www.facebook.com/people/Na-Crema/61559169265299/?locale=da_DK');
+                setLogoUrl(LOGOS.facebook);
+              }}
+              title="Vælg Facebook"
+            >
+              <img src={LOGOS.facebook} alt="" className="quick-link-icon" /> Facebook
+            </button>
+          </div>
         </div>
 
         <div className="control-section">
