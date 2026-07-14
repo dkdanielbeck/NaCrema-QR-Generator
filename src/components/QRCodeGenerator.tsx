@@ -155,11 +155,30 @@ const QRCodeGenerator: React.FC = () => {
       }
     }
 
+    // Generate descriptive filename
+    let domain = 'QR';
+    try {
+      // Use URL constructor to easily extract the hostname
+      const parsedUrl = new URL(url);
+      domain = parsedUrl.hostname.replace(/^www\./, '');
+    } catch (e) {
+      // Fallback if URL is incomplete
+      domain = url.replace(/[^a-zA-Z0-9.-]/g, '').substring(0, 20) || 'QR';
+    }
+
+    let logoName = 'no-logo';
+    if (logoUrl === LOGOS.star) logoName = 'star';
+    else if (logoUrl === LOGOS.instagram) logoName = 'instagram';
+    else if (logoUrl === LOGOS.facebook) logoName = 'facebook';
+    else if (logoUrl === LOGOS.tiktok) logoName = 'tiktok';
+
+    const filename = `nacrema-${domain}-${logoName}.svg`;
+
     const modifiedBlob = new Blob([svgText], { type: 'image/svg+xml' });
     const urlBlob = URL.createObjectURL(modifiedBlob);
     const a = document.createElement('a');
     a.href = urlBlob;
-    a.download = 'NaCrema-QR.svg';
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
