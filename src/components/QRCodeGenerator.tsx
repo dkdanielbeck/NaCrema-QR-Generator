@@ -329,7 +329,7 @@ const QRCodeGenerator: React.FC = () => {
               onClick={() => setLogoUrl(LOGOS.tiktok)}
               title="TikTok"
             >
-              <TikTokIcon />
+              <TikTokIcon className="btn-icon-img" />
             </button>
             <button
               className={`logo-btn text-btn ${logoUrl === '' ? 'active' : ''}`}

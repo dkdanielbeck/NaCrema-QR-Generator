@@ -86,7 +86,8 @@
 }
 
 .control-input,
-.control-select {
+.control-select,
+.url-input {
   width: 100%;
   padding: 1rem 1.25rem;
   background-color: var(--color-bg-secondary);
@@ -100,10 +101,54 @@
 }
 
 .control-input:focus,
-.control-select:focus {
+.control-select:focus,
+.url-input:focus {
   border-color: rgba(44, 44, 44, 0.3);
   background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
+
+.quick-links {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.quick-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quick-link-btn:hover {
+  background-color: #ffffff;
+  color: var(--color-text-primary);
+  border-color: #d1cfc8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.quick-link-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.quick-link-icon.svg-icon {
+  stroke: currentColor;
+}
+
+
 
 .control-group {
   margin-bottom: 1.5rem;
