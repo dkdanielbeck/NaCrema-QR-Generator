@@ -38,14 +38,14 @@ const QRCodeGenerator: React.FC = () => {
       data: url,
       margin: 10,
       qrOptions: {
-        typeNumber: logoUrl === LOGOS.full ? 5 : 0,
+        typeNumber: 0,
         mode: 'Byte',
         errorCorrectionLevel: 'H'
       },
       imageOptions: {
         hideBackgroundDots: true,
-        imageSize: logoUrl === LOGOS.full ? 1.0 : 0.4,
-        margin: logoUrl === LOGOS.full ? 0 : 5,
+        imageSize: 0.4,
+        margin: 5,
         crossOrigin: 'anonymous',
       },
       dotsOptions: {
@@ -77,7 +77,7 @@ const QRCodeGenerator: React.FC = () => {
     qrCode.current.update({
       data: url,
       qrOptions: {
-        typeNumber: logoUrl === LOGOS.full ? 5 : 0,
+        typeNumber: 0,
         mode: 'Byte',
         errorCorrectionLevel: 'H'
       },
@@ -98,8 +98,8 @@ const QRCodeGenerator: React.FC = () => {
       },
       imageOptions: {
         hideBackgroundDots: true,
-        imageSize: logoUrl === LOGOS.full ? 1.0 : 0.4,
-        margin: logoUrl === LOGOS.full ? 0 : 5,
+        imageSize: 0.4,
+        margin: 5,
         crossOrigin: 'anonymous',
       },
       image: logoUrl || undefined
@@ -225,13 +225,6 @@ const QRCodeGenerator: React.FC = () => {
               title="Star Charcoal"
             >
               Star
-            </button>
-            <button
-              className={`logo-btn ${logoUrl === LOGOS.full ? 'active' : ''}`}
-              onClick={() => setLogoUrl(LOGOS.full)}
-              title="Full Charcoal"
-            >
-              Full
             </button>
             <button
               className={`logo-btn ${logoUrl === LOGOS.instagram ? 'active' : ''}`}
