@@ -27,7 +27,8 @@ const QRCodeGenerator: React.FC = () => {
   const [dotType, setDotType] = useState<DotType>('rounded');
   const [cornerSquareType, setCornerSquareType] = useState<CornerSquareType>('extra-rounded');
   const [cornerDotType, setCornerDotType] = useState<CornerDotType>('dot');
-  const [logoUrl, setLogoUrl] = useState<string>('/logos/Logo-star-charcoal.svg');
+  const base = import.meta.env.BASE_URL;
+  const [logoUrl, setLogoUrl] = useState<string>('logos/Logo-star-charcoal.svg');
 
   // Initialize QR Code on mount
   useEffect(() => {
@@ -62,7 +63,7 @@ const QRCodeGenerator: React.FC = () => {
         color: fgColor,
         type: cornerDotType
       },
-      image: logoUrl || undefined
+      image: logoUrl ? `${base}${logoUrl}` : undefined
     });
 
     if (qrRef.current) {
@@ -90,7 +91,7 @@ const QRCodeGenerator: React.FC = () => {
         color: fgColor,
         type: cornerDotType
       },
-      image: logoUrl || undefined
+      image: logoUrl ? `${base}${logoUrl}` : undefined
     });
   }, [url, fgColor, bgColor, dotType, cornerSquareType, cornerDotType, logoUrl]);
 
@@ -208,36 +209,36 @@ const QRCodeGenerator: React.FC = () => {
           </label>
           <div className="logo-buttons">
             <button
-              className={`logo-btn ${logoUrl === '/logos/Logo-star-charcoal.svg' ? 'active' : ''}`}
-              onClick={() => setLogoUrl('/logos/Logo-star-charcoal.svg')}
+              className={`logo-btn ${logoUrl === 'logos/Logo-star-charcoal.svg' ? 'active' : ''}`}
+              onClick={() => setLogoUrl('logos/Logo-star-charcoal.svg')}
               title="Star Charcoal"
             >
               Star
             </button>
             <button
-              className={`logo-btn ${logoUrl === '/logos/Logo-full-charcoal.svg' ? 'active' : ''}`}
-              onClick={() => setLogoUrl('/logos/Logo-full-charcoal.svg')}
+              className={`logo-btn ${logoUrl === 'logos/Logo-full-charcoal.svg' ? 'active' : ''}`}
+              onClick={() => setLogoUrl('logos/Logo-full-charcoal.svg')}
               title="Full Charcoal"
             >
               Full
             </button>
             <button
-              className={`logo-btn ${logoUrl === '/logos/instagram.svg' ? 'active' : ''}`}
-              onClick={() => setLogoUrl('/logos/instagram.svg')}
+              className={`logo-btn ${logoUrl === 'logos/instagram.svg' ? 'active' : ''}`}
+              onClick={() => setLogoUrl('logos/instagram.svg')}
               title="Instagram"
             >
-              <img src="/logos/instagram.svg" alt="Instagram" width="18" height="18" />
+              <img src={`${base}logos/instagram.svg`} alt="Instagram" width="18" height="18" />
             </button>
             <button
-              className={`logo-btn ${logoUrl === '/logos/facebook.svg' ? 'active' : ''}`}
-              onClick={() => setLogoUrl('/logos/facebook.svg')}
+              className={`logo-btn ${logoUrl === 'logos/facebook.svg' ? 'active' : ''}`}
+              onClick={() => setLogoUrl('logos/facebook.svg')}
               title="Facebook"
             >
-              <img src="/logos/facebook.svg" alt="Facebook" width="18" height="18" />
+              <img src={`${base}logos/facebook.svg`} alt="Facebook" width="18" height="18" />
             </button>
             <button
-              className={`logo-btn ${logoUrl === '/logos/tiktok.svg' ? 'active' : ''}`}
-              onClick={() => setLogoUrl('/logos/tiktok.svg')}
+              className={`logo-btn ${logoUrl === 'logos/tiktok.svg' ? 'active' : ''}`}
+              onClick={() => setLogoUrl('logos/tiktok.svg')}
               title="TikTok"
             >
               <TikTokIcon />
