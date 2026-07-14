@@ -44,7 +44,7 @@ const QRCodeGenerator: React.FC = () => {
       },
       imageOptions: {
         hideBackgroundDots: true,
-        imageSize: 0.4,
+        imageSize: logoUrl === LOGOS.full ? 0.65 : 0.4,
         margin: 5,
         crossOrigin: 'anonymous',
       },
@@ -90,6 +90,12 @@ const QRCodeGenerator: React.FC = () => {
       cornersDotOptions: {
         color: fgColor,
         type: cornerDotType
+      },
+      imageOptions: {
+        hideBackgroundDots: true,
+        imageSize: logoUrl === LOGOS.full ? 0.65 : 0.4,
+        margin: 5,
+        crossOrigin: 'anonymous',
       },
       image: logoUrl || undefined
     });
