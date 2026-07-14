@@ -10,10 +10,11 @@ import { Download, Palette, Link, Image as ImageIcon } from 'lucide-react';
 import { LOGOS } from '../utils/logos';
 import './QRCodeGenerator.css';
 
-// Custom TikTok SVG Icon
 const TikTokIcon = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
+    width="18"
+    height="18"
     viewBox="0 0 24 24" 
     fill="none" 
     stroke="currentColor" 
