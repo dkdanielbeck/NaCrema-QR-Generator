@@ -106,12 +106,52 @@ const QRCodeGenerator: React.FC = () => {
     });
   }, [url, fgColor, bgColor, dotType, cornerSquareType, cornerDotType, logoUrl]);
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (!qrCode.current) return;
-    qrCode.current.download({
-      extension: 'svg',
-      name: 'NaCrema-QR'
-    });
+    
+    const blob = await qrCode.current.getRawData('svg');
+    if (!blob) return;
+    
+    let svgText = await blob.text();
+    
+    if (logoUrl) {
+      // Decode the base64 SVG logo to inline it (Figma drops <image> tags)
+      const base64Data = logoUrl.split(',')[1];
+      if (base64Data) {
+        const decodedSvg = atob(base64Data);
+        
+        // Find the <image> tag in the generated SVG
+        const imageRegex = /<image([^>]*)>(.*?)<\/image>|<image([^>]*)\/>/gi;
+        
+        svgText = svgText.replace(imageRegex, (_match: string, attrs1: string, _content: string, attrs2: string) => {
+          const attrs = attrs1 || attrs2 || '';
+          
+          // Extract x, y, width, height from the original <image> tag
+          const xMatch = attrs.match(/x="([^"]*)"/);
+          const yMatch = attrs.match(/y="([^"]*)"/);
+          const wMatch = attrs.match(/width="([^"]*)"/);
+          const hMatch = attrs.match(/height="([^"]*)"/);
+          
+          const x = xMatch ? xMatch[1] : '0';
+          const y = yMatch ? yMatch[1] : '0';
+          const width = wMatch ? wMatch[1] : '0';
+          const height = hMatch ? hMatch[1] : '0';
+          
+          // Inline the decoded SVG by replacing its opening <svg with the bounding box
+          return decodedSvg.replace('<svg ', `<svg x="${x}" y="${y}" width="${width}" height="${height}" `);
+        });
+      }
+    }
+
+    const modifiedBlob = new Blob([svgText], { type: 'image/svg+xml' });
+    const urlBlob = URL.createObjectURL(modifiedBlob);
+    const a = document.createElement('a');
+    a.href = urlBlob;
+    a.download = 'NaCrema-QR.svg';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(urlBlob);
   };
 
   return (
