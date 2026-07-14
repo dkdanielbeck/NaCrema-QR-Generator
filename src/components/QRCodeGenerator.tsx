@@ -137,8 +137,11 @@ const QRCodeGenerator: React.FC = () => {
           const width = wMatch ? wMatch[1] : '0';
           const height = hMatch ? hMatch[1] : '0';
           
-          // Inline the decoded SVG by replacing its opening <svg with the bounding box
-          return decodedSvg.replace('<svg ', `<svg x="${x}" y="${y}" width="${width}" height="${height}" `);
+          // Inline the decoded SVG by removing its existing x,y,width,height and applying the bounding box
+          return decodedSvg.replace(/<svg([^>]*)>/i, (_svgMatch, svgAttrs) => {
+            const newAttrs = svgAttrs.replace(/\s+(x|y|width|height)="[^"]*"/gi, '');
+            return `<svg x="${x}" y="${y}" width="${width}" height="${height}"${newAttrs}>`;
+          });
         });
       }
     }
