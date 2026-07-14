@@ -38,14 +38,14 @@ const QRCodeGenerator: React.FC = () => {
       data: url,
       margin: 10,
       qrOptions: {
-        typeNumber: 0,
+        typeNumber: logoUrl === LOGOS.full ? 15 : 0,
         mode: 'Byte',
         errorCorrectionLevel: 'H'
       },
       imageOptions: {
         hideBackgroundDots: true,
-        imageSize: logoUrl === LOGOS.full ? 0.9 : 0.4,
-        margin: 5,
+        imageSize: logoUrl === LOGOS.full ? 1.0 : 0.4,
+        margin: logoUrl === LOGOS.full ? 0 : 5,
         crossOrigin: 'anonymous',
       },
       dotsOptions: {
@@ -76,6 +76,11 @@ const QRCodeGenerator: React.FC = () => {
     if (!qrCode.current) return;
     qrCode.current.update({
       data: url,
+      qrOptions: {
+        typeNumber: logoUrl === LOGOS.full ? 15 : 0,
+        mode: 'Byte',
+        errorCorrectionLevel: 'H'
+      },
       dotsOptions: {
         color: fgColor,
         type: dotType
@@ -93,8 +98,8 @@ const QRCodeGenerator: React.FC = () => {
       },
       imageOptions: {
         hideBackgroundDots: true,
-        imageSize: logoUrl === LOGOS.full ? 0.9 : 0.4,
-        margin: 5,
+        imageSize: logoUrl === LOGOS.full ? 1.0 : 0.4,
+        margin: logoUrl === LOGOS.full ? 0 : 5,
         crossOrigin: 'anonymous',
       },
       image: logoUrl || undefined
