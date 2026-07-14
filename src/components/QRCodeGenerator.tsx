@@ -38,14 +38,14 @@ const QRCodeGenerator: React.FC = () => {
       data: url,
       margin: 10,
       qrOptions: {
-        typeNumber: logoUrl === LOGOS.full ? 15 : 0,
+        typeNumber: 0,
         mode: 'Byte',
         errorCorrectionLevel: 'H'
       },
       imageOptions: {
         hideBackgroundDots: true,
-        imageSize: logoUrl === LOGOS.full ? 1.0 : 0.4,
-        margin: logoUrl === LOGOS.full ? 0 : 5,
+        imageSize: logoUrl === LOGOS.full ? 0.6 : 0.4,
+        margin: logoUrl === LOGOS.full ? 2 : 5,
         crossOrigin: 'anonymous',
       },
       dotsOptions: {
@@ -77,7 +77,7 @@ const QRCodeGenerator: React.FC = () => {
     qrCode.current.update({
       data: url,
       qrOptions: {
-        typeNumber: logoUrl === LOGOS.full ? 15 : 0,
+        typeNumber: 0,
         mode: 'Byte',
         errorCorrectionLevel: 'H'
       },
@@ -98,8 +98,8 @@ const QRCodeGenerator: React.FC = () => {
       },
       imageOptions: {
         hideBackgroundDots: true,
-        imageSize: logoUrl === LOGOS.full ? 1.0 : 0.4,
-        margin: logoUrl === LOGOS.full ? 0 : 5,
+        imageSize: logoUrl === LOGOS.full ? 0.6 : 0.4,
+        margin: logoUrl === LOGOS.full ? 2 : 5,
         crossOrigin: 'anonymous',
       },
       image: logoUrl || undefined
@@ -142,7 +142,7 @@ const QRCodeGenerator: React.FC = () => {
             <Palette size={18} />
             Tilpas Design
           </label>
-          
+
           <div className="control-group">
             <label className="sub-label">Mønster Stil</label>
             <select
@@ -273,7 +273,7 @@ const QRCodeGenerator: React.FC = () => {
       >
         <div className="qr-preview-card">
           <div className="qr-preview-box" ref={qrRef} />
-          
+
           <button className="download-btn" onClick={handleDownload}>
             <Download size={20} />
             Download som SVG
